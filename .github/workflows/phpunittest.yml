@@ -1,0 +1,26 @@
+name: PHP Unit Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run PHPUnit tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0' # You can change the PHP version as needed
+
+    - name: Install dependencies
+      run: composer install --no-progress --no-suggest --prefer-dist
+
+    - name: Run PHPUnit tests
+      run: php vendor/bin/phpunit
