@@ -1,4 +1,4 @@
-name: PHP Unit Test
+name: PHP Code Style Check
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  test:
-    name: Run PHPUnit tests
+  style-check:
+    name: Check PHP Code Style
     runs-on: ubuntu-latest
 
     steps:
@@ -15,12 +15,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Setup PHP
-      uses: shivammathur/setup-php@v3
+      uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1' # You can change the PHP version as needed
 
     - name: Install dependencies
       run: composer install
 
-    - name: Run PHPUnit tests
-      run: php vendor/bin/phpunit
+    - name: Run PHP_CodeSniffer
+      run: php vendor/bin/phpcs --standard=PSR12 .
