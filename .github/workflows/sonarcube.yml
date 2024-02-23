@@ -1,0 +1,37 @@
+name: SonarQube Scan
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sonarqube_scan:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0' # Change PHP version as needed
+
+    - name: Install SonarScanner
+      run: |
+        sudo apt-get install openjdk-11-jdk
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+        unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+        export PATH=$PATH:/path/to/sonar-scanner-4.6.2.2472-linux/bin
+        
+    - name: Run SonarScanner
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=test1000_test \
+          -Dsonar.sources=src \
+          -Dsonar.tests=tests \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.organization=test1000 \
+          -Dsonar.login=f7701a68ec2edfae4443ac10ed7632579c49e4ed # replace with your SonarCloud token
