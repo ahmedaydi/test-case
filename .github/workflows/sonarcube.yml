@@ -31,7 +31,7 @@ jobs:
         
     - name: Run SonarScanner
       run: |
-        sonar-scanner-4.6.2.2472-linux/bin \
+        ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
           -Dsonar.projectKey=test1000_test \
           -Dsonar.sources=src \
           -Dsonar.tests=tests \
