@@ -17,11 +17,10 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.0' # Change PHP version as needed
+        php-version: '8.0'
 
     - name: Install SonarScanner
       run: |
-        sudo apt-get install openjdk-11-jdk
         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner-cli-4.6.2.2472-linux.zip
         export PATH=$PATH:/path/to/sonar-scanner-4.6.2.2472-linux/bin
